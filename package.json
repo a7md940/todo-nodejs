@@ -1,0 +1,30 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "todo app with authentication",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a7md940/todo-nodejs.git"
+  },
+  "keywords": [
+    "todolist"
+  ],
+  "author": "Ahmed Atef",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/a7md940/todo-nodejs/issues"
+  },
+  "homepage": "https://github.com/a7md940/todo-nodejs#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.2",
+    "express": "^4.16.4",
+    "joi": "^14.3.0",
+    "jsonwebtoken": "^8.4.0",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.3.15"
+  }
+}
