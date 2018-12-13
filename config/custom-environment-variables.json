@@ -1,0 +1,4 @@
+{
+    "hashSecretKey": "todo_HashSecureKey",
+    "jwtSecureKey": "todo_jwtSecureKey"
+}

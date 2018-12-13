@@ -4,7 +4,9 @@
   "description": "todo app with authentication",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "export todo_jwtSecureKey=todoahmedatef && node app",
+    "dev": "export todo_jwtSecureKey=todoahmedatef && nodemon app"
   },
   "repository": {
     "type": "git",
@@ -21,10 +23,17 @@
   "homepage": "https://github.com/a7md940/todo-nodejs#readme",
   "dependencies": {
     "bcrypt": "^3.0.2",
+    "config": "^3.0.0",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "joi": "^14.3.0",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
-    "mongoose": "^5.3.15"
+    "mongoose": "^5.3.15",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.7"
   }
 }
