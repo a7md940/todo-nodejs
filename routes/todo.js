@@ -65,6 +65,24 @@ router.delete('/:id', async (req, res)=>{
 
     let todoDeleted = await Todo.findByIdAndRemove(toDoId);
     return res.status(200).send({success: true, data: todoDeleted});
-})
+});
+
+router.put('/', async (req, res)=>{
+    const toDoId = req.body.toDoId;
+    const newToDo = req.body.newToDo;
+
+    if(!toDoId) return res.status(400).send({success: false, msg: 'invalid toDo id.'});
+    if(!newToDo) return res.status(40).send({success: false, msg: 'Sorry, you have to insert toDo data.'});
+
+    Todo.findById(toDoId)
+    .then((data)=>{
+        if(data.title == newToDo.title) return res.status(400).send({success: false, msg: 'Sorry, you have insert new toDo data to update.'});
+        
+    })
+    .catch((err)=> res.status(400).send({success: false, msg: err}));
+
+    let updatedToDo = await Todo.findByIdAndUpdate(toDoId, newToDo,{new: true});
+    return res.status(200).send({success: true, data: updatedToDo, msg: 'todo successfully updated.'});
+});
 
 module.exports = router;
