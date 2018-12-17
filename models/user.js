@@ -26,7 +26,8 @@ const userSchema = new mongoose.Schema({
     },
     userImage:{
         type: String,
-        required: false
+        required: false,
+        default: 'uploads/profile-images/default.png'
     }
 });
 

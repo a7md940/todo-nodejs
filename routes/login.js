@@ -23,9 +23,13 @@ try{
         success: false,
         msg: `username or password is invalid.`
     });
-
+    console.log(user);
     // response
-    res.status(200).send({success: true, token: user.makeJWT(), data: {username: user.username, id: user._id}});
+    res.status(200).send({success: true, token: user.makeJWT(), data: {
+        username: user.username, 
+        id: user._id,
+        userImage: user.userImage
+    }});
 }catch(ex){
     console.error(ex);
 }

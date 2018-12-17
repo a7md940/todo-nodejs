@@ -39,14 +39,18 @@ const multerConfig = {
 
 const upload = multer(multerConfig).single('image');
 
-router.post('/', async (req, res)=>{
+router.put('/', async (req, res)=>{
 
 try{
     // multer uploading image
-    upload(req, res, async err =>{
-        if(err) return res.status(400).send({success:false, msg: err}) // multer err.
+    upload(req, res, async (err) =>{
+        if(err) {
+            console.log(err);
+            return res.status(400).send({success:false, msg: err, fromCatch:'no'}) // multer err.
+        }
         else {
             // if there is no file.
+            console.log(req.file)
             if(!req.file) return res.status(400).send({
                 success: false, 
                 msg:'you have to insert image file to upload.'
@@ -54,21 +58,19 @@ try{
             
             // update userImage field in database by file path that uploaded.
             let userId = req.headers.payload.id;
-            const user = await User.findById(userId);
+            const user = await User.findOneAndUpdate({_id: userId}, {userImage: req.file.path},{new: true});
             if(!user) return res.status(400).send({success: false, msg:'invalid user.'})
 
-            user.userImage = req.file.path;
             res.status(200).send({
                 success: true, 
                 msg:`image updated successfuly to ${user.username}.`, 
-                imagePath: user.userImage,
-                user: _.pick(user, ['_id', 'username', 'email'])
+                user: _.pick(user, ['_id', 'username', 'email', 'userImage'])
             })
 
         }
     });
 }catch(err){
-    return res.status(400).send({success:false, msg: err});
+    return res.status(400).send({success:false, msg: err, fromCatch:'yes'});
 }
 
 });

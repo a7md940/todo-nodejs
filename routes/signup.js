@@ -27,7 +27,7 @@ try{
     // Create JWT
     const token = user.makeJWT();
     
-    res.send({success: true, token: token, data: _.pick(user,['username', 'email', '_id'])});
+    res.send({success: true, token: token, data: _.pick(user,['username', 'email', '_id', 'userImage'])});
     
 }catch(ex){
     return res.send({exception: ex.errmsg});
