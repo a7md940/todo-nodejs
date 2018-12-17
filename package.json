@@ -6,13 +6,13 @@
   "scripts": {
     "test": "jest",
     "start": "node app.js",
-    "dev": "nodemon app"
+    "dev": "export todo_HashSecureKey=todoahmedatef && export todo_db=mongodb://ahmed:fuckdear022@ds125352.mlab.com:25352/todolist-ahmed-atef && export todo_jwtSecureKey=todotokenkey && nodemon app"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/a7md940/todo-nodejs.git"
   },
-  "engines":{
+  "engines": {
     "node": "8.11.2"
   },
   "keywords": [
@@ -26,9 +26,11 @@
   "homepage": "https://github.com/a7md940/todo-nodejs#readme",
   "dependencies": {
     "bcrypt": "^3.0.2",
+    "compression": "^1.7.3",
     "config": "^3.0.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "helmet": "^3.15.0",
     "joi": "^14.3.0",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",

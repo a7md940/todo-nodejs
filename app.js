@@ -3,12 +3,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+
 // connect to database..
 mongoose.connect(config.get('db'))
-    .then(()=>{
-        console.log(`mongoDB Connected.. `);
-    })
-    .catch((err)=> console.error(err));
+.then(()=>{
+    console.log(`mongoDB Connected.. `);
+})
+.catch((err)=> console.error(err));
 
 // app routes
 const signupRouter = require('./routes/signup');
@@ -21,6 +22,8 @@ const auth = require('./middlewares/auth');
 
 
 const app = express();
+
+require('./startup/prod')(app);
 
 // middlewares..
 app.use(cors());
