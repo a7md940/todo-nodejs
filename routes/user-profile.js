@@ -11,11 +11,12 @@ const storage = multer.diskStorage({
         cb(null,timestamp.toLowerCase() + '_' + file.originalname.toLowerCase());
     },
     destination: (req, file, cb)=>{
-        // console.log( fs.existsSync('./uploads/profile-images/'+ req.headers.payload.username) )
-        if(!fs.existsSync('./uploads/profile-images/'+ req.headers.payload.username))
-            fs.mkdirSync('./uploads/profile-images/'+ req.headers.payload.username);
+        // delete make directory cuze of heroku doesn't support that.
+        // // console.log( fs.existsSync('./uploads/profile-images/'+ req.headers.payload.username) )
+        // if(!fs.existsSync('./uploads/profile-images/'+ req.headers.payload.username))
+        //     fs.mkdirSync('./uploads/profile-images/'+ req.headers.payload.username);
 
-        cb(null,'./uploads/profile-images/'+ req.headers.payload.username +'/');
+        cb(null,'./uploads/profile-images/');
     } 
 });
 
