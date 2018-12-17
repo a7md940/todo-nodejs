@@ -2,7 +2,7 @@ const config = require('config');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const path = require('path');
 
 // connect to database..
 mongoose.connect(config.get('db'))
@@ -29,14 +29,19 @@ require('./startup/prod')(app);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use( express.static('public'));
-app.use('/uploads', express.static('uploads'));
+app.use( express.static('angular'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // app routes middlewares..
 app.use('/api/users/signup', signupRouter); // signup route
 app.use('/api/users/login', loginRouter); // login route
 app.use('/api/users/todo', auth, toDoRouter); // todo route
 app.use('/api/users/image-profile', auth, userProfile);
+
+// return angular app when open node app root
+app.use((res,res,next)=>{
+    res.sendFile(path.join(__dirname, "angular", "index.html"))
+});
 
 const PORT = process.env.PORT || 8484;
 
