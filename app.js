@@ -2,13 +2,11 @@ const config = require('config');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const multer = require('multer');
 
 // connect to database..
-mongoose.connect('mongodb://localhost:27017/todo')
+mongoose.connect(config.get('db'))
     .then(()=>{
-        console.log(`mongoDB Connected.. 
-        jwtSecureKey: ${config.get('jwtSecureKey')}`);
+        console.log(`mongoDB Connected.. `);
     })
     .catch((err)=> console.error(err));
 
@@ -37,6 +35,9 @@ app.use('/api/users/login', loginRouter); // login route
 app.use('/api/users/todo', auth, toDoRouter); // todo route
 app.use('/api/users/image-profile', auth, userProfile);
 
-app.listen(3000,()=>{
-    console.log('app listening on port 3000');
+const PORT = process.env.PORT || 8484;
+
+app.listen(PORT,()=>{
+    console.log(`app listening on port ${PORT}`);
+
 }); 

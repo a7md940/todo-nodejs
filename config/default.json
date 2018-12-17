@@ -1,4 +1,6 @@
 {
     "hashSecretKey": "",
-    "jwtSecureKey": ""
+    "jwtSecureKey": "",
+    "databaseUsername": "",
+    "databasePassword": ""
 }

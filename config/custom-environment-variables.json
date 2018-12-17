@@ -1,4 +1,5 @@
 {
     "hashSecretKey": "todo_HashSecureKey",
-    "jwtSecureKey": "todo_jwtSecureKey"
+    "jwtSecureKey": "todo_jwtSecureKey",
+    "db": "todo_db"
 }

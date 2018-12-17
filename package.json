@@ -5,12 +5,15 @@
   "main": "app.js",
   "scripts": {
     "test": "jest",
-    "start": "export todo_jwtSecureKey=todoahmedatef && node app",
-    "dev": "export todo_jwtSecureKey=todoahmedatef && nodemon app"
+    "start": "node app.js",
+    "dev": "nodemon app"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/a7md940/todo-nodejs.git"
+  },
+  "engines":{
+    "node": "8.11.2"
   },
   "keywords": [
     "todolist"
