@@ -39,7 +39,7 @@ app.use('/api/users/todo', auth, toDoRouter); // todo route
 app.use('/api/users/image-profile', auth, userProfile);
 
 // return angular app when open node app root
-app.use((res,res,next)=>{
+app.use('/', (res,res,next)=>{
     res.sendFile(path.join(__dirname, "angular", "index.html"))
 });
 
