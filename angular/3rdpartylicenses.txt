@@ -453,8 +453,6 @@ SOFTWARE.
 @angular/forms
 MIT
 
-@angular/material/form-field
-
 @angular/material/button
 
 zone.js
