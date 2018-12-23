@@ -16,6 +16,7 @@ const signupRouter = require('./routes/signup');
 const loginRouter = require('./routes/login');
 const toDoRouter = require('./routes/todo');
 const userProfile = require('./routes/user-profile');
+const getOneUser = require('./routes/user');
 
 // authentication middleware..
 const auth = require('./middlewares/auth');
@@ -29,16 +30,17 @@ require('./startup/prod')(app);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use('/', express.static('angular'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // app routes middlewares..
+app.use('/api/user',getOneUser);
 app.use('/api/users/signup', signupRouter); // signup route
 app.use('/api/users/login', loginRouter); // login route
 app.use('/api/users/todo', auth, toDoRouter); // todo route
 app.use('/api/users/image-profile', auth, userProfile);
 
 // return angular app when open node app root
+app.use('/', express.static('angular'));
 app.use('/', (req, res, next)=>{
     res.sendFile(path.join(__dirname, "angular", "index.html"))
 });
