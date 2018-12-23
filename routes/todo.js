@@ -31,9 +31,12 @@ router.post('/', async (req,res)=>{
     });
 });
 
+// get all todos for one user and get one todo by id.
 router.get('/', async (req, res)=>{
 try{
     const toDoId = req.query.toDoId;
+
+    // if there's no todo id in request query parameters retrieve all todos for one user.
     if(!toDoId){
         const userId = req.header('payload').id;
         const toDosByUserId = await Todo
@@ -45,6 +48,7 @@ try{
         
         return res.status(200).send({success: true,data: [...toDosByUserId]});
     }else {
+        // if req query parameters have todo id retreive it.
         Todo.findById(toDoId)
         .then(data=>{
             return res.status(200).send({success: true, data: data});
@@ -55,7 +59,7 @@ try{
         
     }
 }catch(ex){
-    console.err(ex);
+    console.error(ex);
 }
 });
 
