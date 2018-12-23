@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User } = require('../models/user');
 
 router.get('/', (req, res)=>{
-    if(! (req.query.username || req.query.email)) return res.status(400).send({msg: 'invalid username or email.'};)
+    if(! (req.query.username || req.query.email)) return res.status(400).send({msg: 'invalid username or email.'});
 
     if(req.query.username){
         User.find({username: req.query.username})
