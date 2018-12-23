@@ -47,11 +47,10 @@ try{
     upload(req, res, async (err) =>{
         if(err) {
             console.log(err);
-            return res.status(400).send({success:false, msg: err, fromCatch:'no'}) // multer err.
+            return res.status(400).send({success:false, msg: {multerErr:err}}) // multer err.
         }
         else {
             // if there is no file.
-            console.log(req.file)
             if(!req.file) return res.status(400).send({
                 success: false, 
                 msg:'you have to insert image file to upload.'
@@ -59,7 +58,11 @@ try{
             
             // update userImage field in database by file path that uploaded.
             let userId = req.headers.payload.id;
-            const user = await User.findOneAndUpdate({_id: userId}, {userImage: req.file.path},{new: true});
+            const user = await User.findOneAndUpdate(
+                { _id: userId },
+                { userImage: req.file.path },
+                { new: true} 
+                ).catch(err => res.send('invalid user.',err));
             if(!user) return res.status(400).send({success: false, msg:'invalid user.'})
 
             res.status(200).send({
@@ -71,7 +74,7 @@ try{
         }
     });
 }catch(err){
-    return res.status(400).send({success:false, msg: err, fromCatch:'yes'});
+    return res.status(400).send({success:false, msg: err, fromCatchBlock:'yes'});
 }
 
 });

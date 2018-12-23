@@ -1,8 +1,22 @@
 const router = require('express').Router();
 const { User } = require('../models/user');
+const { Todo } = require('../models/todo');
 
-router.get('/', (req, res)=>{
-    if(! (req.query.username || req.query.email)) return res.status(400).send({msg: 'invalid username or email.'});
+router.get('/', async (req, res)=>{
+    if(! (req.query.username || req.query.email || req.query.userId)) 
+        return res.status(400).send({msg: 'invalid query parameter.'});
+
+    if(req.query.userId){
+       let allTodos = await Todo.find({userId: req.query.userId})
+       .select({title: 1, _id: 0, checked: 1})
+       .catch(err=>  res.send({success: false, msg:'there is no todos for this user'}));
+
+       let completedTodo = await Todo.find({userId: req.query.userId, checked: true})
+       .select({title: 1, _id: 0, checked: 1})
+       .catch(err => res.send({success: false, msg:'there is no todos for this user'}));
+
+        return res.send({success: true, allTodos, completedTodo});
+    }
 
     if(req.query.username){
         User.find({username: req.query.username})
